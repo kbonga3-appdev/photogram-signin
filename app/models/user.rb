@@ -5,6 +5,7 @@
 #  id             :integer          not null, primary key
 #  comments_count :integer
 #  likes_count    :integer
+#  password       :string
 #  private        :boolean
 #  username       :string
 #  created_at     :datetime         not null
@@ -19,6 +20,8 @@ class User < ApplicationRecord
       :uniqueness => { :case_sensitive => false }
     }
   )
+
+  has_secure_password
 
   def comments
     return Comment.where({ :author_id => self.id })

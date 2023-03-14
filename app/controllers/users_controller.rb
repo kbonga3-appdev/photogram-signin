@@ -43,4 +43,9 @@ class UsersController < ApplicationController
     redirect_to("/users")
   end
 
+  def registration_form
+
+    render({ :template => "users/signup_form.html.erb" })
+  end 
+
 end

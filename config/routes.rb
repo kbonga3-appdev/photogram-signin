@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get("/", { :controller => "users", :action => "index" })
 
+  get("/user_sign_up", { :controller => "users", :action => "registration_form" })
   # User routes
 
   # CREATE
