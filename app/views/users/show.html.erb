@@ -1,3 +1,5 @@
+
+
 <h1><%= @user.username %></h1>
 
 <dl>
@@ -10,14 +12,14 @@
       <label for="browser_username">Username</label>
       <input id="browser_username" type="text" name="input_username" placeholder="Enter a username..." value="<%= @user.username %>">
 
-      <button>Update user</button>
+      <button class="btn btn-primary">Update user</button>
     </form>
   </dd>
 </dl>
 
 <h2>Own photos (<%= @user.own_photos.count %>)</h2>
 
-<table border="1">
+<table border="1" class="table table-success table-striped">
   <tr>
     <th>
       Image

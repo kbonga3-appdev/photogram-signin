@@ -1,13 +1,12 @@
+<div class="col-md-8 mx-auto" >
 
 
 <div>
-<h1>User Signup</h1>
+<h1>User Sign in</h1>
 </div> 
 
 
-
-
-<form action="/insert_user_record">
+<form action="/verify_credentials" method="post">
 <div class="mb-3">
   <label for="browser_username" class="form-label" >Username: </label>
   <input id="browser_username" type="text" name="input_username" placeholder="Enter a username...">
@@ -18,11 +17,7 @@
   <input id="browser_password" type="password" name="input_password" placeholder="Enter a password...">
   </div>
 
-<div class="mb-3">
-  <label for="browser_password_confirmation">Password: </label>
-  <input id="browser_password_confirmation" type="password" name="input_confirm_password" placeholder="Confirm your password...">
-</div>
-  <button class="btn btn-primary" >Sign Up</button>
+
+  <button class="btn btn-primary" >Sign in</button>
 </form>
-
-
+</div>

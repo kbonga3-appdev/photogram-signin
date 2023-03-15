@@ -16,10 +16,18 @@ class UsersController < ApplicationController
     user = User.new
 
     user.username = params.fetch("input_username")
+    user.password = params.fetch("input_password")
+    user.password_confirmation = params.fetch("input_confirm_password")
 
-    user.save
+    save_status = user.save
 
-    redirect_to("/users/#{user.username}")
+    if save_status == true
+      session.store(:user_id, user.id)
+
+    redirect_to("/users/#{user.username}", { :notice => "Welcome, " + user.username + "!" })
+    else
+    redirect_to("/user_sign_up", { :alert => user.errors.full_messages.to_sentence })
+    end
   end
 
   def update
@@ -43,9 +51,39 @@ class UsersController < ApplicationController
     redirect_to("/users")
   end
 
-  def registration_form
+  def sign_out
+   reset_session
 
+   redirect_to("/", { :notice => "You have successfully logged out"})
+  end
+
+  def registration_form
     render({ :template => "users/signup_form.html.erb" })
   end 
+  
+  def sign_in
+    render({ :template => "users/signin_form.html.erb" })
+  end
+
+  def authenticate
+    un = params.fetch("input_username")
+    pw = params.fetch("input_password")
+
+    user = User.where({ :username => un }).at(0)
+
+    if user == nil
+      redirect_to("/user_sign_in", { :alert => "Username not found! "})
+    else
+     if user.authenticate(pw)
+      session.store(:user_id, user.id)
+
+      redirect_to("/", { :notice => "Welcome back " + user.username + "!"})
+     else
+      redirect_to("/user_sign_in", { :alert => "Wrong Password!"})
+    end
+  end
+end
+
+   
 
 end

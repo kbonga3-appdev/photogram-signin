@@ -30,7 +30,15 @@
       <label for="browser_caption">Caption</label>
       <textarea id="browser_caption" name="input_caption" placeholder="Enter a caption for the photo..."><%= @photo.caption %></textarea>
 
-      <button>Update photo</button>
+    <% if @photo.owner_id == session.fetch(:user_id) %>
+      <button class="btn btn-primary"  
+      >Update photo</button>
+      <% else %>
+      <button hidden="hidden" class="btn btn-primary"  
+      >Update photo</button>
+    
+    <% end %>
+
     </form>
   </dd>
 
@@ -44,7 +52,7 @@
 
 <h2>Comments</h2>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Commenter</th>
     <th>Comment</th>
@@ -70,16 +78,20 @@
 </table>
 
 <h3>Add a new comment</h3>
-
+              
 <form action="/insert_comment_record" method="post">
+ 
+
   <label for="browser_photo_id">Photo ID</label>
   <input id="browser_photo_id" type="text" value="<%= @photo.id %>" name="input_photo_id">
 
+ <!--
   <label for="browser_author_id">Author ID</label>
   <input id="browser_author_id" type="text" name="input_author_id">
+-->
 
   <label for="browser_comment">Comment</label>
   <textarea id="browser_comment" name="input_body" placeholder="Enter a comment..."></textarea>
 
-  <button>Add comment</button>
+  <button class="btn btn-primary" >Add comment</button>
 </form>
